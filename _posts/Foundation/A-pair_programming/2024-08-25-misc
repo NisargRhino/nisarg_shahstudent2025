@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Molecule 3D Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        #viewer {
+            width: 600px;
+            height: 400px;
+            border: 1px solid #ccc;
+            margin-top: 20px;
+        }
+    </style>
+    <script src="https://3dmol.csb.pitt.edu/build/3Dmol-min.js"></script>
+</head>
+<body>
+
+    <h1>Molecule 3D Viewer</h1>
+
+    <input type="text" id="smilesInput" placeholder="Enter SMILES string" style="width: 300px; padding: 10px;">
+    <button onclick="visualizeMolecule()" style="padding: 10px 20px; margin-left: 10px;">Visualize</button>
+
+    <div id="viewer"></div>
+
+    <script>
+        function visualizeMolecule() {
+            const smiles = document.getElementById('smilesInput').value;
+            if (!smiles) {
+                alert('Please enter a SMILES string.');
+                return;
+            }
+
+            const element = document.getElementById('viewer');
+            const viewer = $3Dmol.createViewer(element, {
+                backgroundColor: '#fff'
+            });
+
+            const options = {
+                width: 600,
+                height: 400,
+                resizable: true,
+                input_format: 'smi'
+            };
+
+            const url = `https://3dmol.csb.pitt.edu/3Dmol/convert?smiles=${encodeURIComponent(smiles)}&format=mol`;
+
+            $3Dmol.download(url, viewer, {}, function() {
+                viewer.setStyle({}, {stick: {}});
+                viewer.zoomTo();
+                viewer.render();
+            });
+        }
+    </script>
+
+</body>
+</html>
