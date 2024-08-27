@@ -10,8 +10,8 @@ hide: true
 <div style="text-align:center;">
     <input type="text" id="smilesInput" placeholder="Enter SMILES string" style="width: 300px; padding: 10px;">
     <button onclick="visualizeMolecule()" style="padding: 10px 20px; margin-left: 10px;">Visualize</button>
-    <div id="viewer" style="width: 600px; height: 400px; border: 1px solid #ccc; margin-top: 20px; background-color: white; display: none;"></div>
-    <div id="loadingIndicator" style="width: 600px; height: 400px; border: 1px solid #ccc; margin-top: 20px; display: flex; justify-content: center; align-items: center;">
+    <div id="viewer" style="width: 600px; height: 400px; border: 1px solid #ccc; margin-top: 20px; background-color: white;"></div>
+    <div id="loadingIndicator" style="width: 600px; height: 400px; border: 1px solid #ccc; margin-top: 20px; display: none; justify-content: center; align-items: center;">
         Loading 3Dmol... <div class="spinner"></div> 
     </div>
     <div id="errorFallback" style="width: 600px; height: 400px; border: 1px solid #ccc; margin-top: 20px; display: none; color: red;">
@@ -22,7 +22,6 @@ hide: true
 <script src="https://3dmol.org/build/3Dmol.js"></script> 
 <script>
     let viewer;
-    let is3DmolLoaded = false;
 
     function visualizeMolecule() {
         const smiles = document.getElementById('smilesInput').value.trim();
@@ -31,72 +30,60 @@ hide: true
             return;
         }
 
-        if (!is3DmolLoaded) {
-            load3Dmol().then(() => {
-                visualizeMolecule();
-            }).catch(error => {
-                console.error('Error loading 3Dmol:', error);
+        if (!viewer) {
+            initializeViewer();
+        }
+
+        // Show loading indicator and hide other elements
+        document.getElementById('loadingIndicator').style.display = 'flex';
+        document.getElementById('viewer').style.display = 'none';
+        document.getElementById('errorFallback').style.display = 'none';
+
+        const url = `https://cactus.nci.nih.gov/chemical/structure/${encodeURIComponent(smiles)}/file?format=sdf`;
+
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok.');
+                }
+                return response.text();
+            })
+            .then(data => {
+                viewer.clear();
+                viewer.addModel(data, 'sdf'); // 'sdf' is the correct format for this kind of data
+                viewer.setStyle({}, { stick: {} });
+                viewer.zoomTo();
+                viewer.render();
+                document.getElementById('loadingIndicator').style.display = 'none';
+                document.getElementById('viewer').style.display = 'block';  // Ensure viewer is displayed
+            })
+            .catch(error => {
+                console.error('Error fetching or processing molecule data:', error);
                 document.getElementById('loadingIndicator').style.display = 'none';
                 document.getElementById('errorFallback').style.display = 'block';
             });
-            return;
-        }
-
-        if (viewer) {
-            viewer.clear();
-
-            const url = `https://3dmol.org/3Dmol/convert?smiles=${encodeURIComponent(smiles)}&format=mol`;
-
-            $3Dmol.download(url, viewer, {}, function(m, error) {
-                if (error) {
-                    console.error('Error fetching or processing molecule data:', error);
-                    alert('Error fetching or processing molecule data. Please check your SMILES string and try again. Details in console.');
-                } else if (m) {
-                    viewer.addModel(m, 'mol');
-                    viewer.setStyle({}, { stick: {} });
-                    viewer.zoomTo();
-                    viewer.render();
-
-                    document.getElementById('loadingIndicator').style.display = 'none';
-                    document.getElementById('viewer').style.display = 'block';
-                } else {
-                    alert('Unexpected error occurred. Please check the console for details.');
-                }
-            });
-        } else {
-            alert('3Dmol viewer is not yet ready. Please try again in a few moments.');
-        }
     }
 
-    function load3Dmol() {
-        return new Promise((resolve, reject) => {
-            // Check if 3Dmol is already loaded (might be preloaded)
-            if (typeof $3Dmol !== 'undefined') {
-                is3DmolLoaded = true;
-                const element = document.getElementById('viewer');
-                viewer = $3Dmol.createViewer(element, { backgroundColor: 'white' });
-                resolve();
-                return; 
-            }
-
-            const script = document.createElement('script');
-            script.src = 'https://3dmol.org/build/3Dmol.js';
-            script.onload = () => {
-                is3DmolLoaded = true;
-                const element = document.getElementById('viewer');
-                viewer = $3Dmol.createViewer(element, { backgroundColor: 'white' });
-                resolve();
-            };
-            script.onerror = (error) => {
-                reject(error); 
-            };
-            document.head.appendChild(script);
-        });
+    function initializeViewer() {
+        const element = document.getElementById('viewer');
+        viewer = $3Dmol.createViewer(element, { backgroundColor: 'white' });
     }
 </script>
 
 <style>
-/* ... (spinner styles remain the same) */
+    .spinner {
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #3498db;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
 </style>
 
 <link rel="preload" href="https://3dmol.org/build/3Dmol.js" as="script">
