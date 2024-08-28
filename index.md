@@ -5,19 +5,27 @@ description: Home Page
 hide: true
 ---
 
-# Molecule 3D Viewer
+
 
 <div style="text-align:center;">
-    <input type="text" id="smilesInput" placeholder="Enter SMILES string" style="width: 300px; padding: 10px;">
-    <button onclick="visualizeMolecule()" style="padding: 10px 20px; margin-left: 10px;">Visualize</button>
-    <div id="viewer" style="width: 600px; height: 400px; border: 1px solid #ccc; margin-top: 20px; background-color: white;"></div>
-    <div id="loadingIndicator" style="width: 600px; height: 400px; border: 1px solid #ccc; margin-top: 20px; display: none; justify-content: center; align-items: center;">
-        Loading 3Dmol... <div class="spinner"></div> 
-    </div>
-    <div id="errorFallback" style="width: 600px; height: 400px; border: 1px solid #ccc; margin-top: 20px; display: none; color: red;">
-        Error loading 3Dmol. Please check your internet connection or try again later.
+    <h2>Welcome to My Project Hub</h2>
+    <p>This is where I keep all my miscellaneous projects to improve my JavaScript ideation and development skills.</p>
+</div>
+
+<div style="display: flex; justify-content: center; align-items: center; flex-direction: column; min-height: 70vh;">
+    <div style="text-align:center;">
+        <input type="text" id="smilesInput" placeholder="Enter SMILES string" style="width: 300px; padding: 10px;">
+        <button onclick="visualizeMolecule()" style="padding: 10px 20px; margin-left: 10px;">Visualize</button>
+        <div id="viewer" style="width: 600px; height: 400px; border: 1px solid #ccc; margin-top: 20px; background-color: white;"></div>
+        <div id="loadingIndicator" style="width: 600px; height: 400px; border: 1px solid #ccc; margin-top: 20px; display: none; justify-content: center; align-items: center;">
+            Loading 3Dmol... <div class="spinner"></div> 
+        </div>
+        <div id="errorFallback" style="width: 600px; height: 400px; border: 1px solid #ccc; margin-top: 20px; display: none; color: red;">
+            Error loading 3Dmol. Please check your internet connection or try again later.
+        </div>
     </div>
 </div>
+# Molecule 3D Viewer
 
 <script src="https://3dmol.org/build/3Dmol.js"></script> 
 <script>
