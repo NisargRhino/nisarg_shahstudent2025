@@ -11,7 +11,7 @@
             margin: 0;
             padding: 0;
             line-height: 1.6;
-            background-image: url('https://www.nasa.gov/sites/default/files/thumbnails/image/nasa-logo-web-rgb.png');
+            background-image: url('');
             background-size: cover;
             background-attachment: fixed;
             background-repeat: no-repeat;
