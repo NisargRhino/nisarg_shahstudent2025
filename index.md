@@ -5,27 +5,34 @@ description: Home Page
 hide: true
 ---
 
-
-
-<div style="text-align:center;">
-    <h2>Welcome to My Project Hub</h2>
-    <p>This is where I keep all my miscellaneous projects to improve my JavaScript ideation and development skills.</p>
+<div style="text-align: center; margin-top: 50px;">
+    <h2 style="font-family: 'Arial', sans-serif; color: #2c3e50; font-size: 28px; margin-bottom: 20px;">Welcome to My Project Hub</h2>
+    <p style="font-family: 'Arial', sans-serif; color: #7f8c8d; font-size: 18px; max-width: 600px; margin: 0 auto 40px;">
+        This is where I keep all my miscellaneous projects to improve my JavaScript ideation and development skills.
+    </p>
 </div>
 
 <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; min-height: 70vh;">
-    <div style="text-align:center;">
-        <input type="text" id="smilesInput" placeholder="Enter SMILES string" style="width: 300px; padding: 10px;">
-        <button onclick="visualizeMolecule()" style="padding: 10px 20px; margin-left: 10px;">Visualize</button>
-        <div id="viewer" style="width: 600px; height: 400px; border: 1px solid #ccc; margin-top: 20px; background-color: white;"></div>
-        <div id="loadingIndicator" style="width: 600px; height: 400px; border: 1px solid #ccc; margin-top: 20px; display: none; justify-content: center; align-items: center;">
-            Loading 3Dmol... <div class="spinner"></div> 
+    <div style="text-align: center;">
+        <input type="text" id="smilesInput" placeholder="Enter SMILES string" 
+            style="width: 300px; padding: 10px; font-size: 16px; border: 2px solid #bdc3c7; border-radius: 5px;">
+        <button onclick="visualizeMolecule()" 
+            style="padding: 10px 20px; margin-left: 10px; font-size: 16px; color: white; background-color: #3498db; border: none; border-radius: 5px; cursor: pointer;">
+            Visualize
+        </button>
+        <div id="viewer" 
+            style="width: 600px; height: 400px; border: 1px solid #ccc; margin-top: 20px; background-color: white; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
         </div>
-        <div id="errorFallback" style="width: 600px; height: 400px; border: 1px solid #ccc; margin-top: 20px; display: none; color: red;">
+        <div id="loadingIndicator" 
+            style="width: 600px; height: 400px; border: 1px solid #ccc; margin-top: 20px; display: none; justify-content: center; align-items: center; background-color: #ecf0f1;">
+            Loading 3Dmol... <div class="spinner" style="margin-left: 10px;"></div> 
+        </div>
+        <div id="errorFallback" 
+            style="width: 600px; height: 400px; border: 1px solid #e74c3c; margin-top: 20px; display: none; color: #e74c3c; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             Error loading 3Dmol. Please check your internet connection or try again later.
         </div>
     </div>
 </div>
-# Molecule 3D Viewer
 
 <script src="https://3dmol.org/build/3Dmol.js"></script> 
 <script>
@@ -79,6 +86,12 @@ hide: true
 </script>
 
 <style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f7f7f7;
+        color: #333;
+    }
+
     .spinner {
         border: 4px solid #f3f3f3;
         border-top: 4px solid #3498db;
@@ -92,6 +105,21 @@ hide: true
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
     }
-</style>
 
-<link rel="preload" href="https://3dmol.org/build/3Dmol.js" as="script">
+    input:focus, button:focus {
+        outline: none;
+        box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+    }
+
+    button:hover {
+        background-color: #2980b9;
+    }
+
+    #viewer, #loadingIndicator, #errorFallback {
+        transition: box-shadow 0.3s ease;
+    }
+
+    #viewer:hover, #loadingIndicator:hover, #errorFallback:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+</style>
