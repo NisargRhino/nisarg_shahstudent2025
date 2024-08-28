@@ -21,7 +21,7 @@ hide: true
             Visualize
         </button>
         <div id="viewer" 
-            style="width: 600px; height: 400px; border: 1px solid #ccc; margin-top: 20px; background-color: white; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            style="width: 600px; height: 400px; border: 1px solid #ccc; margin-top: 20px; background-color: black; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
         </div>
         <div id="loadingIndicator" 
             style="width: 600px; height: 400px; border: 1px solid #ccc; margin-top: 20px; display: none; justify-content: center; align-items: center; background-color: #ecf0f1;">
