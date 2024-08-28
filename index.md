@@ -20,8 +20,12 @@ hide: true
             style="padding: 10px 20px; margin-left: 10px; font-size: 16px; color: white; background-color: #3498db; border: none; border-radius: 5px; cursor: pointer;">
             Visualize
         </button>
+        <button onclick="resetViewer()" 
+            style="padding: 10px 20px; margin-left: 10px; font-size: 16px; color: white; background-color: #e74c3c; border: none; border-radius: 5px; cursor: pointer;">
+            Reset
+        </button>
         <div id="viewer" 
-            style="width: 600px; height: 400px; border: 1px solid #ccc; margin-top: 20px; background-color: black; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            style="width: 600px; height: 400px; border: 1px solid #ccc; margin-top: 20px; background-color: black; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); display: flex; justify-content: center; align-items: center;">
         </div>
         <div id="loadingIndicator" 
             style="width: 600px; height: 400px; border: 1px solid #ccc; margin-top: 20px; display: none; justify-content: center; align-items: center; background-color: #ecf0f1;">
@@ -73,7 +77,7 @@ hide: true
                 viewer.clear();
                 viewer.addModel(data, 'sdf'); // 'sdf' is the correct format for this kind of data
                 viewer.setStyle({}, { stick: {} });
-                viewer.zoomTo();
+                viewer.zoomTo(); // Ensure this line is properly included to center the molecule
                 viewer.render();
                 document.getElementById('loadingIndicator').style.display = 'none';
                 document.getElementById('viewer').style.display = 'block';  // Ensure viewer is displayed
@@ -88,6 +92,14 @@ hide: true
     function initializeViewer() {
         const element = document.getElementById('viewer');
         viewer = $3Dmol.createViewer(element, { backgroundColor: 'white' });
+    }
+
+    function resetViewer() {
+        if (viewer) {
+            viewer.clear();
+            viewer.render();
+        }
+        document.getElementById('smilesInput').value = ''; // Clear the input field
     }
 </script>
 
@@ -139,8 +151,8 @@ hide: true
         position: absolute;
         top: 0;
         left: 0;
-        width: 100%;
-        height: 60%;
+        width: 80%;
+        height: 50%;
         overflow: hidden;
         z-index: 1;
     }
@@ -159,15 +171,10 @@ hide: true
         animation-duration: 12s;
     }
 
-
-
     @keyframes moveIcon {
-        /*0% { transform: translateY(0) rotate(0deg); }
-        50% { transform: translateY(-50px) rotate(360deg); }
-        100% { transform: translateY(0) rotate(0deg); } */
-        0% { transform:  rotate(0deg); }
-        50% { transform:  rotate(360deg); }
-        100% { transform:  rotate(0deg); }
+        0% { transform: rotate(0deg); }
+        50% { transform: rotate(360deg); }
+        100% { transform: rotate(0deg); }
     }
 
     .icon img {
