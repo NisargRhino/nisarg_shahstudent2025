@@ -159,17 +159,7 @@ hide: true
         animation-duration: 12s;
     }
 
-    .icon:nth-child(2) {
-        top: 30%;
-        left: 45%;
-        animation-duration: 15s;
-    }
 
-    .icon:nth-child(3) {
-        top: 60%;
-        left: 25%;
-        animation-duration: 18s;
-    }
 
     @keyframes moveIcon {
         /*0% { transform: translateY(0) rotate(0deg); }
