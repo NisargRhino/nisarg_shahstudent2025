@@ -36,8 +36,7 @@ hide: true
     <!-- Moving icons -->
     <div class="moving-icons">
         <div class="icon"><img src="{{ site.baseurl }}/images/chemistry.png" alt="Icon 1" /></div>
-        <div class="icon"><img src="https://image.flaticon.com/icons/png/512/616/616489.png" alt="Icon 2" /></div>
-        <div class="icon"><img src="https://image.flaticon.com/icons/png/512/616/616593.png" alt="Icon 3" /></div>
+
     </div>
 </div>
 
@@ -141,7 +140,7 @@ hide: true
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
+        height: 60%;
         overflow: hidden;
         z-index: 1;
     }
@@ -173,9 +172,12 @@ hide: true
     }
 
     @keyframes moveIcon {
-        0% { transform: translateY(0) rotate(0deg); }
+        /*0% { transform: translateY(0) rotate(0deg); }
         50% { transform: translateY(-50px) rotate(360deg); }
-        100% { transform: translateY(0) rotate(0deg); }
+        100% { transform: translateY(0) rotate(0deg); } */
+        0% { transform:  rotate(0deg); }
+        50% { transform:  rotate(360deg); }
+        100% { transform:  rotate(0deg); }
     }
 
     .icon img {
