@@ -6,14 +6,14 @@ hide: true
 ---
 
 <div style="text-align: center; margin-top: 50px;">
-    <h2 style="font-family: 'Arial', sans-serif; color: #2c3e50; font-size: 28px; margin-bottom: 20px;">Welcome to My Project Hub</h2>
-    <p style="font-family: 'Arial', sans-serif; color: #7f8c8d; font-size: 18px; max-width: 600px; margin: 0 auto 40px;">
+    <h2 style="font-family: 'Arial', sans-serif; color: #fff; font-size: 28px; margin-bottom: 20px;">Welcome to My Project Hub</h2>
+    <p style="font-family: 'Arial', sans-serif; color: #ecf0f1; font-size: 18px; max-width: 600px; margin: 0 auto 40px;">
         This is where I keep all my miscellaneous projects to improve my JavaScript ideation and development skills.
     </p>
 </div>
 
-<div style="display: flex; justify-content: center; align-items: center; flex-direction: column; min-height: 70vh;">
-    <div style="text-align: center;">
+<div style="display: flex; justify-content: center; align-items: center; flex-direction: column; min-height: 70vh; position: relative;">
+    <div style="text-align: center; z-index: 2;">
         <input type="text" id="smilesInput" placeholder="Enter SMILES string" 
             style="width: 300px; padding: 10px; font-size: 16px; border: 2px solid #bdc3c7; border-radius: 5px;">
         <button onclick="visualizeMolecule()" 
@@ -31,6 +31,13 @@ hide: true
             style="width: 600px; height: 400px; border: 1px solid #e74c3c; margin-top: 20px; display: none; color: #e74c3c; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             Error loading 3Dmol. Please check your internet connection or try again later.
         </div>
+    </div>
+    
+    <!-- Moving icons -->
+    <div class="moving-icons">
+        <div class="icon"><img src="{{ site.baseurl }}/images/chemistry.png" alt="Icon 1" /></div>
+        <div class="icon"><img src="https://image.flaticon.com/icons/png/512/616/616489.png" alt="Icon 2" /></div>
+        <div class="icon"><img src="https://image.flaticon.com/icons/png/512/616/616593.png" alt="Icon 3" /></div>
     </div>
 </div>
 
@@ -88,8 +95,13 @@ hide: true
 <style>
     body {
         font-family: 'Arial', sans-serif;
-        background-color: #f7f7f7;
-        color: #333;
+        background-color: #000;
+        color: #fff;
+        background-image: url('');
+        background-size: cover;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-position: center center;
     }
 
     .spinner {
@@ -121,5 +133,53 @@ hide: true
 
     #viewer:hover, #loadingIndicator:hover, #errorFallback:hover {
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Moving Icons */
+    .moving-icons {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 1;
+    }
+
+    .icon {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        opacity: 0.7;
+        animation: moveIcon 15s linear infinite;
+    }
+
+    .icon:nth-child(1) {
+        top: 10%;
+        left: 15%;
+        animation-duration: 12s;
+    }
+
+    .icon:nth-child(2) {
+        top: 30%;
+        left: 45%;
+        animation-duration: 15s;
+    }
+
+    .icon:nth-child(3) {
+        top: 60%;
+        left: 25%;
+        animation-duration: 18s;
+    }
+
+    @keyframes moveIcon {
+        0% { transform: translateY(0) rotate(0deg); }
+        50% { transform: translateY(-50px) rotate(360deg); }
+        100% { transform: translateY(0) rotate(0deg); }
+    }
+
+    .icon img {
+        width: 100%;
+        height: 100%;
     }
 </style>
