@@ -77,8 +77,8 @@
 
     <div class="article">
         <h2>Version Control</h2>
-        <p>While creating my typewriter effect on my homepage, I went through several iterations of my code in order to test out different features and customize the visualization to make it more minimalistic. I used version control to track how the changes I made were reflected onto my homepage.</p>
-        <p>I have my repository cloned on my desktop where I can also access my files, however, I typically use WSL when making changes to my site. The files in my GitHub are updated when I push my changes from VSCode and sync my changes to the repository.</p>
+        <p>While creating my Chemistry Visualizer on my homepage, I went through several iterations of my code in order to test out different features and customize the visualization to make it more minimalistic. I used version control to track how the changes I made were reflected onto my homepage.</p>
+        <p>I have my repository cloned on my desktop where I can also access my files. The files in my GitHub are updated when I push my changes from VSCode and sync my changes to the repository.</p>
         <p>I would use CSS and JavaScript to customize the default UI of the 'portfolio_2025' to include more features and make the design unique. I would also add a capture page to document screenshots of important teaching moments.</p>
     </div>
 
