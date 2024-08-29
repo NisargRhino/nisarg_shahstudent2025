@@ -12,6 +12,7 @@ hide: true
     </p>
 </div>
 
+<!-- Parent container with flexbox -->
 <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; min-height: 70vh; position: relative;">
     <div style="text-align: center; z-index: 2;">
         <input type="text" id="smilesInput" placeholder="Enter SMILES string" 
@@ -24,6 +25,7 @@ hide: true
             style="padding: 10px 20px; margin-left: 10px; font-size: 16px; color: white; background-color: #e74c3c; border: none; border-radius: 5px; cursor: pointer;">
             Reset
         </button>
+        <!-- Viewer Box -->
         <div id="viewer" 
             style="width: 600px; height: 400px; border: 1px solid #ccc; margin-top: 20px; background-color: black; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); display: flex; justify-content: center; align-items: center;">
         </div>
@@ -74,10 +76,11 @@ hide: true
                 return response.text();
             })
             .then(data => {
+                console.log("#### opening");
                 viewer.clear();
                 viewer.addModel(data, 'sdf'); // 'sdf' is the correct format for this kind of data
                 viewer.setStyle({}, { stick: {} });
-                viewer.zoomTo(); // Ensure this line is properly included to center the molecule
+                viewer.zoomTo(); // Automatically centers and fits the molecule
                 viewer.render();
                 document.getElementById('loadingIndicator').style.display = 'none';
                 document.getElementById('viewer').style.display = 'block';  // Ensure viewer is displayed
