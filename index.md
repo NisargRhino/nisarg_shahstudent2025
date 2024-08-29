@@ -151,7 +151,7 @@ hide: true
         position: absolute;
         top: 0;
         left: 0;
-        width: 80%;
+        width: 50%;
         height: 50%;
         overflow: hidden;
         z-index: 1;
