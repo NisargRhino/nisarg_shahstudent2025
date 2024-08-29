@@ -84,6 +84,7 @@ hide: true
                 viewer.render();
                 document.getElementById('loadingIndicator').style.display = 'none';
                 document.getElementById('viewer').style.display = 'block';  // Ensure viewer is displayed
+                document.getElementById('undefined').style.position = '';  // Ensure viewer is displayed
             })
             .catch(error => {
                 console.error('Error fetching or processing molecule data:', error);
