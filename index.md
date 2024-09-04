@@ -5,6 +5,16 @@ description: Home Page
 hide: true
 ---
 
+<!-- Submenu -->
+<nav style="background-color: #2c3e50; padding: 10px 0;">
+    <ul style="list-style: none; margin: 0; padding: 0; display: flex; justify-content: center; gap: 20px;">
+    <li><a href="http://127.0.0.1:4100/nisarg_shahstudent2025/2024/09/03/MiniGame.html" style="text-decoration: none; color: #ecf0f1; font-size: 18px;">MiniGame</a></li>
+        <li><a href="http://127.0.0.1:4100/nisarg_shahstudent2025/2024/08/28/Hacks(Summary).html" style="text-decoration: none; color: #ecf0f1; font-size: 18px;">Sprints</a></li>
+        <li><a href="http://127.0.0.1:4100/nisarg_shahstudent2025/2024/08/25/captures.html" style="text-decoration: none; color: #ecf0f1; font-size: 18px;">Captures</a></li>
+        <li><a href="http://127.0.0.1:4100/nisarg_shahstudent2025/" style="text-decoration: none; color: #ecf0f1; font-size: 18px;">Home Page</a></li>
+    </ul>
+</nav>
+
 <div style="text-align: center; margin-top: 50px;">
     <h2 style="font-family: 'Arial', sans-serif; color: #fff; font-size: 28px; margin-bottom: 20px;">Welcome to My Project Hub</h2>
     <p style="font-family: 'Arial', sans-serif; color: #ecf0f1; font-size: 18px; max-width: 600px; margin: 0 auto 40px;">
