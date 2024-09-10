@@ -38,6 +38,10 @@ hide: true
         <!-- Viewer Box -->
         <div id="viewer" 
             style="width: 600px; height: 400px; border: 1px solid #ccc; margin-top: 20px; background-color: black; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); display: flex; justify-content: center; align-items: center;">
+            <div canvas id="undefined" 
+            position = "static"
+            >
+
         </div>
         <div id="loadingIndicator" 
             style="width: 600px; height: 400px; border: 1px solid #ccc; margin-top: 20px; display: none; justify-content: center; align-items: center; background-color: #ecf0f1; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
@@ -47,10 +51,12 @@ hide: true
             style="width: 600px; height: 400px; border: 1px solid #e74c3c; margin-top: 20px; display: none; color: #e74c3c; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             Error loading 3Dmol. Please check your internet connection or try again later.
         </div>
+        
+
     </div> 
     <!-- Random Image -->
     <div id="randomImage" onclick="sayRandomText();" style="position: absolute; cursor: pointer; z-index: 9999;">
-        <img src="{{ site.baseurl }}/images/logo.png" alt="Random Icon" style="width: 50px; height: 50px;" />
+        <img src="{{ site.baseurl }}/images/mort.png" alt="Random Icon" style="width: 50px; height: 50px;" />
     </div>
 </div>
 
@@ -60,8 +66,8 @@ hide: true
     // Variables to control image movement
     let posX = Math.random() * (window.innerWidth - 50);
     let posY = Math.random() * (window.innerHeight - 50);
-    let velocityX = 2;
-    let velocityY = 2;
+    let velocityX = 1;
+    let velocityY = 1;
 
     // Function to move the image
     function moveImage() {
@@ -160,4 +166,6 @@ hide: true
             viewer.clear();
         }
     }
+
+
 </script>

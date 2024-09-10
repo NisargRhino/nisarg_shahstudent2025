@@ -14,3 +14,30 @@
   {%- include theme/cayman/base.html -%}
 {% endif %}
 </html>
+
+
+<style>
+  body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom right, #346bb3, #ffffff);
+      text-align: center;
+      padding: 20px;
+  }
+
+
+  button {
+      padding: 15px;
+      font-size: 18px;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+  }
+
+  button:hover {
+      background: #ffc107;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  }
+</style>

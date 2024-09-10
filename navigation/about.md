@@ -133,3 +133,86 @@ Creator of Student 2025
   <li><strong>2022:</strong> Wins 4th NBA Championship and Finals MVP</li>
   <li><strong>2023:</strong> Scores 50 points in Game 7 vs. Kings, wins Celebrity Golf Tournament</li>
 </ul>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Nisarg Shah</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #777;
+        }
+        .flying-image {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            width: 100px;
+            height: 100px;
+            animation: fly 10s infinite;
+        }
+        @keyframes fly {
+            0% {
+                transform: translate(0, 0);
+            }
+            25% {
+                transform: translate(400px, 100px);
+            }
+            50% {
+                transform: translate(200px, 400px);
+            }
+            75% {
+                transform: translate(500px, 500px);
+            }
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>About Me</h1>
+        <p>My name is Nisarg Shah, and I’m currently in grade 11. I love exploring the great outdoors...</p>
+        
+        <div class="footer">
+            <p>&copy; 2024 Nisarg Shah</p>
+        </div>
+    </div>
+
+    <!-- Flying image -->
+    <img class="flying-image" src="{{ site.baseurl }}/images/mort.png" alt="Flying Image">
+
+    <script>
+        const img = document.querySelector('.flying-image');
+        let x = 0, y = 0;
+
+        function randomPosition() {
+            x = Math.random() * window.innerWidth;
+            y = Math.random() * window.innerHeight;
+            img.style.transform = `translate(${x}px, ${y}px)`;
+        }
+
+        setInterval(randomPosition, 3000);
+    </script>
+</body>
+
+</html>
