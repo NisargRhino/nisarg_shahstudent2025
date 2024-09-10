@@ -1,5 +1,7 @@
 ---
-layout: page
+layout: post
+type : ccc
+comments : True
 title: About
 permalink: /about/
 ---
@@ -62,7 +64,10 @@ Creator of Student 2025
 <body>
     <div class="container">
         <p style="color: #000000;">
-            Hello! My name is Nisarg Shah, and I am currently in grade 11. I really love exploring the great outdoors, especially hiking through national parks. When I'm not outside, I like reading good sci fi books or playing basketball/badminton with friends. I'm a big fan of the Golden State Warriors and love Stephen Curry.
+          • My name is Nisarg Shah, and I’m currently in grade 11.
+	        •	I love exploring the great outdoors, especially hiking through national parks.
+	        •	When I’m not outside, I enjoy reading sci-fi books or playing basketball and badminton with friends.
+	        •	I’m a big fan of the Golden State Warriors and Stephen Curry.
         </p>
         
         <div class="hobbies">
@@ -79,6 +84,10 @@ Creator of Student 2025
     </div>
 </body>
 </html>
+
+<img src="{{ site.baseurl }}/images/portfolio.png" >
+
+
 <h1>Stephen Curry Portfolio, because why not</h1>
 
 
