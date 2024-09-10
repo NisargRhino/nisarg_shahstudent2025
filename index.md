@@ -49,8 +49,7 @@ hide: true
         </div>
     </div> 
     <!-- Random Image -->
-    <div id="randomImage" onclick="sayRandomText();" style="position: absolute; display: none; cursor: pointer; z-index: 9999; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: transform 0.3s ease;">
-        <!-- Change the src to your own PNG file -->
+    <div id="randomImage" onclick="sayRandomText();" style="position: absolute; cursor: pointer; z-index: 9999;">
         <img src="{{ site.baseurl }}/images/logo.png" alt="Random Icon" style="width: 50px; height: 50px;" />
     </div>
 </div>
@@ -58,251 +57,107 @@ hide: true
 <script src="https://3dmol.org/build/3Dmol.js"></script> 
 
 <script>
-// Function to show and hide the image randomly
-function showRandomImage() {
-    const image = document.getElementById('randomImage');
-    const imageWidth = image.offsetWidth;
-    const imageHeight = image.offsetHeight;
-    const randomX = Math.random() * (window.innerWidth - imageWidth);
-    const randomY = Math.random() * (window.innerHeight - imageHeight);
-    
-    // Set random position ensuring the image is fully visible
-    image.style.left = `${Math.max(0, randomX)}px`;
-    image.style.top = `${Math.max(0, randomY)}px`;
-    
-    // Show the image
-    image.style.display = 'block';
-}
+    // Variables to control image movement
+    let posX = Math.random() * (window.innerWidth - 50);
+    let posY = Math.random() * (window.innerHeight - 50);
+    let velocityX = 2;
+    let velocityY = 2;
 
-// Function for text-to-speech on image click
-function sayRandomText() {
-    const messages = ["Code, code, code!"];
-    const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-    const synth = window.speechSynthesis;
-    const utterThis = new SpeechSynthesisUtterance(randomMessage);
-    synth.speak(utterThis);
+    // Function to move the image
+    function moveImage() {
+        const image = document.getElementById('randomImage');
+        const imageWidth = image.offsetWidth;
+        const imageHeight = image.offsetHeight;
 
-    // Move the image to a new random position
-    showRandomImage();
-}
+        // Update the position
+        posX += velocityX;
+        posY += velocityY;
 
-// Show the image when the page loads
-window.onload = () => {
-    showRandomImage();
-};
+        // Bounce off the walls
+        if (posX <= 0 || posX + imageWidth >= window.innerWidth) {
+            velocityX = -velocityX;
+        }
+        if (posY <= 0 || posY + imageHeight >= window.innerHeight) {
+            velocityY = -velocityY;
+        }
 
-// SMILES visualization logic
-let viewer;
+        // Apply the new position
+        image.style.left = `${posX}px`;
+        image.style.top = `${posY}px`;
 
-function visualizeMolecule() {
-    const smiles = document.getElementById('smilesInput').value.trim();
-    if (!smiles) {
-        alert('Please enter a valid SMILES string.');
-        return;
+        // Call the moveImage function repeatedly to keep the image moving
+        requestAnimationFrame(moveImage);
     }
 
-    if (!viewer) {
-        initializeViewer();
+    // Start the image moving when the page loads
+    window.onload = () => {
+        moveImage();
+    };
+
+    // Function for text-to-speech on image click
+    function sayRandomText() {
+        const messages = ["Code, code, code!"];
+        const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+        const synth = window.speechSynthesis;
+        const utterThis = new SpeechSynthesisUtterance(randomMessage);
+        synth.speak(utterThis);
     }
 
-    // Show loading indicator and hide other elements
-    document.getElementById('loadingIndicator').style.display = 'flex';
-    document.getElementById('viewer').style.display = 'none';
-    document.getElementById('errorFallback').style.display = 'none';
+    // SMILES visualization logic
+    let viewer;
 
-    const url = `https://cactus.nci.nih.gov/chemical/structure/${encodeURIComponent(smiles)}/file?format=sdf`;
+    function visualizeMolecule() {
+        const smiles = document.getElementById('smilesInput').value.trim();
+        if (!smiles) {
+            alert('Please enter a valid SMILES string.');
+            return;
+        }
 
-    fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok.');
-            }
-            return response.text();
-        })
-        .then(data => {
-            console.log("#### opening");
-            viewer.clear();
-            viewer.addModel(data, 'sdf'); // 'sdf' is the correct format for this kind of data
-            viewer.setStyle({}, { stick: {} });
-            viewer.zoomTo(); // Automatically centers and fits the molecule
-            viewer.render();
-            document.getElementById('loadingIndicator').style.display = 'none';
-            document.getElementById('viewer').style.display = 'block';  // Ensure viewer is displayed
-            document.getElementById('undefined').style.position = '';  // Ensure viewer is displayed
-        })
-        .catch(error => {
-            console.error('Error fetching or processing molecule data:', error);
-            document.getElementById('loadingIndicator').style.display = 'none';
-            document.getElementById('errorFallback').style.display = 'block';
+        if (!viewer) {
+            initializeViewer();
+        }
+
+        // Show loading indicator and hide other elements
+        document.getElementById('loadingIndicator').style.display = 'flex';
+        document.getElementById('viewer').style.display = 'none';
+        document.getElementById('errorFallback').style.display = 'none';
+
+        const url = `https://cactus.nci.nih.gov/chemical/structure/${encodeURIComponent(smiles)}/file?format=sdf`;
+
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok.');
+                }
+                return response.text();
+            })
+            .then(data => {
+                viewer.clear();
+                viewer.addModel(data, 'sdf'); // 'sdf' is the correct format for this kind of data
+                viewer.setStyle({}, { stick: {} });
+                viewer.zoomTo(); // Automatically centers and fits the molecule
+                viewer.render();
+                document.getElementById('loadingIndicator').style.display = 'none';
+                document.getElementById('viewer').style.display = 'block';  // Ensure viewer is displayed
+            })
+            .catch(error => {
+                console.error('Error fetching or processing molecule data:', error);
+                document.getElementById('loadingIndicator').style.display = 'none';
+                document.getElementById('errorFallback').style.display = 'flex';  // Show error fallback
+            });
+    }
+
+    function initializeViewer() {
+        viewer = $3Dmol.createViewer('viewer', {
+            defaultcolors: $3Dmol.rasmolElementColors,
+            backgroundColor: '#000'  // Set the background color to black
         });
-}
-
-function initializeViewer() {
-    const element = document.getElementById('viewer');
-    viewer = $3Dmol.createViewer(element, { backgroundColor: 'white' });
-}
-
-function resetViewer() {
-    if (viewer) {
-        viewer.clear();
-        viewer.render();
     }
-    document.getElementById('smilesInput').value = ''; // Clear the input field
-}
+
+    function resetViewer() {
+        document.getElementById('smilesInput').value = '';
+        if (viewer) {
+            viewer.clear();
+        }
+    }
 </script>
-
-<style>
-    body {
-        font-family: 'Arial', sans-serif;
-        background-color: #1a1a1a;
-        color: #fff;
-        background-image: linear-gradient(135deg, #1a1a1a 25%, #333 100%);
-        background-size: cover;
-        background-attachment: fixed;
-        background-repeat: no-repeat;
-        background-position: center;
-        min-height: 100vh;
-        margin: 0;
-        padding: 0;
-    }
-
-    nav {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    h2 {
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    }
-
-    p {
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    }
-
-    input, button {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    button:hover {
-        background-color: #2980b9;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    }
-
-    #viewer {
-        width: 600px;
-        height: 400px;
-        border: 1px solid #ccc;
-        background-color: black;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    #loadingIndicator, #errorFallback {
-        transition: box-shadow 0.3s ease;
-    }
-
-    #loadingIndicator:hover, #errorFallback:hover {
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    }
-
-    .spinner {
-        border: 4px solid #f3f3f3;
-        border-top: 4px solid #3498db;
-        border-radius: 50%;
-        width: 20px;
-        height: 20px;
-        animation: spin 2s linear infinite;
-    }
-
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-
-    input:focus, button:focus {
-        outline: none;
-        box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
-    }
-
-    /* Random Image */
-    #randomImage {
-        z-index: 9999; /* Ensure it is in front of everything */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        transition: transform 0.3s ease;
-    }
-
-    #randomImage:hover {
-        transform: scale(1.1);
-    }
-
-    /* Art Gallery Styles */
-    .gallery {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px;
-        margin-top: 50px;
-    }
-
-    .gallery-item {
-        width: 200px;
-        height: 200px;
-        background-color: #fff;
-        border: 2px solid #ccc;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        overflow: hidden;
-        position: relative;
-    }
-
-    .gallery-item img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .gallery-item:hover {
-        transform: scale(1.05);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    }
-
-    .gallery-item .caption {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
-        color: #fff;
-        text-align: center;
-        padding: 10px;
-        box-sizing: border-box;
-        font-size: 14px;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-
-    .gallery-item:hover .caption {
-        opacity: 1;
-    }
-</style>
-
-<!-- Art Gallery Section -->
-<div class="gallery">
-    <div class="gallery-item">
-        <img src="{{ site.baseurl }}/images/art1.jpg" alt="Art 1">
-        <div class="caption">Art 1</div>
-    </div>
-    <div class="gallery-item">
-        <img src="{{ site.baseurl }}/images/art2.jpg" alt="Art 2">
-        <div class="caption">Art 2</div>
-    </div>
-    <div class="gallery-item">
-        <img src="{{ site.baseurl }}/images/art3.jpg" alt="Art 3">
-        <div class="caption">Art 3</div>
-    </div>
-    <div class="gallery-item">
-        <img src="{{ site.baseurl }}/images/art4.jpg" alt="Art 4">
-        <div class="caption">Art 4</div>
-    </div>
-</div>
