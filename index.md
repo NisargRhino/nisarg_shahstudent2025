@@ -51,7 +51,7 @@ hide: true
     <!-- Random Image -->
     <div id="randomImage" onclick="sayRandomText();" style="position: absolute; cursor: pointer; z-index: 9999;">
         <img src="{{ site.baseurl }}/images/mort.png" alt="Random Icon" style="width: 50px; height: 50px;" />
-    </div>
+    
 </div>
 
 <script src="https://3dmol.org/build/3Dmol.js"></script> 
