@@ -11,7 +11,7 @@ hide: true
         <li><a href="http://127.0.0.1:4100/nisarg_shahstudent2025/2024/09/03/MiniGame.html" style="text-decoration: none; color: #ecf0f1; font-size: 18px;">MiniGame</a></li>
         <li><a href="http://127.0.0.1:4100/nisarg_shahstudent2025/2024/08/28/Hacks(Summary).html" style="text-decoration: none; color: #ecf0f1; font-size: 18px;">Sprints</a></li>
         <li><a href="http://127.0.0.1:4100/nisarg_shahstudent2025/2024/08/25/captures.html" style="text-decoration: none; color: #ecf0f1; font-size: 18px;">Captures</a></li>
-        <li><a href="http://127.0.0.1:4100/nisarg_shahstudent2025/" style="text-decoration: none; color: #ecf0f1; font-size: 18px;">Home Page</a></li>
+        <li><a href="http://127.0.0.1:4100/nisarg_shahstudent2025/about/" style="text-decoration: none; color: #ecf0f1; font-size: 18px;">About</a></li>
     </ul>
 </nav>
 
