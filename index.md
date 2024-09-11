@@ -92,7 +92,7 @@ hide: true
     };
 
     function sayRandomText() {
-        const messages = ["Code, code, code!"];
+        const messages = ["Code code code!"];
         const randomMessage = messages[Math.floor(Math.random() * messages.length)];
         const synth = window.speechSynthesis;
         const utterThis = new SpeechSynthesisUtterance(randomMessage);
