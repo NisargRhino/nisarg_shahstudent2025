@@ -81,20 +81,16 @@ hide: true
             velocityY = -velocityY;
         }
 
-        // Apply the new position
         image.style.left = `${posX}px`;
         image.style.top = `${posY}px`;
 
-        // Call the moveImage function repeatedly to keep the image moving
         requestAnimationFrame(moveImage);
     }
 
-    // Start the image moving when the page loads
     window.onload = () => {
         moveImage();
     };
 
-    // Function for text-to-speech on image click
     function sayRandomText() {
         const messages = ["Code, code, code!"];
         const randomMessage = messages[Math.floor(Math.random() * messages.length)];
@@ -103,7 +99,6 @@ hide: true
         synth.speak(utterThis);
     }
 
-    // SMILES visualization logic
     let viewer;
 
     function visualizeMolecule() {
@@ -133,24 +128,24 @@ hide: true
             })
             .then(data => {
                 viewer.clear();
-                viewer.addModel(data, 'sdf'); // 'sdf' is the correct format for this kind of data
+                viewer.addModel(data, 'sdf'); 
                 viewer.setStyle({}, { stick: {} });
-                viewer.zoomTo(); // Automatically centers and fits the molecule
+                viewer.zoomTo(); 
                 viewer.render();
                 document.getElementById('loadingIndicator').style.display = 'none';
-                document.getElementById('viewer').style.display = 'block';  // Ensure viewer is displayed
+                document.getElementById('viewer').style.display = 'block';  
             })
             .catch(error => {
                 console.error('Error fetching or processing molecule data:', error);
                 document.getElementById('loadingIndicator').style.display = 'none';
-                document.getElementById('errorFallback').style.display = 'flex';  // Show error fallback
+                document.getElementById('errorFallback').style.display = 'flex';  
             });
     }
 
     function initializeViewer() {
         viewer = $3Dmol.createViewer('viewer', {
             defaultcolors: $3Dmol.rasmolElementColors,
-            backgroundColor: '#000'  // Set the background color to black
+            backgroundColor: '#000'  
         });
     }
 
