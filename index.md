@@ -39,7 +39,6 @@ hide: true
         <div id="viewer" 
             style="width: 600px; height: 400px; border: 1px solid #ccc; margin-top: 20px; background-color: black; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); display: flex; justify-content: center; align-items: center;">
         </div>
-        </div>
         <div id="loadingIndicator" 
             style="width: 600px; height: 400px; border: 1px solid #ccc; margin-top: 20px; display: none; justify-content: center; align-items: center; background-color: #ecf0f1; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             Loading 3Dmol... <div class="spinner" style="margin-left: 10px;"></div> 

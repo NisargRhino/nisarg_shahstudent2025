@@ -7,7 +7,7 @@ permalink: /about/
 ---
 
 Creator of Student 2025
-# About Me
+
 
 
 <html lang="en">
@@ -190,27 +190,16 @@ Creator of Student 2025
 </head>
 <body>
     <div class="container">
-        <h1>About Me</h1>
-        <p>My name is Nisarg Shah, and I’m currently in grade 11. I love exploring the great outdoors...</p>
-        
-        <div class="footer">
-            <p>&copy; 2024 Nisarg Shah</p>
-        </div>
-    </div>
-
     <!-- Flying image -->
     <img class="flying-image" src="{{ site.baseurl }}/images/mort.png" alt="Flying Image">
-
     <script>
         const img = document.querySelector('.flying-image');
         let x = 0, y = 0;
-
         function randomPosition() {
             x = Math.random() * window.innerWidth;
             y = Math.random() * window.innerHeight;
             img.style.transform = `translate(${x}px, ${y}px)`;
         }
-
         setInterval(randomPosition, 3000);
     </script>
 </body>
