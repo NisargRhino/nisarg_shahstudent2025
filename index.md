@@ -54,7 +54,7 @@ hide: true
     
 </div>
 
-<script src="https://3dmol.org/build/3Dmol.js"></script> 
+<script src="https://3dmol.org/build/3Dmol-min.js"></script> 
 
 <script>
     // Variables to control image movement
@@ -127,34 +127,49 @@ hide: true
                 return response.text();
             })
             .then(data => {
-                viewer.clear();
-                viewer.addModel(data, 'sdf'); 
-                viewer.setStyle({}, { stick: {} });
-                viewer.zoomTo(); 
+                console.log('SDF data received:', data);
+                viewer.addModel(data, 'sdf');
+                viewer.setStyle({}, {stick: {radius: 0.2}, sphere: {scale: 0.3}});
+                viewer.zoomTo();
                 viewer.render();
+                document.getElementById('viewer').style.display = 'block';
                 document.getElementById('loadingIndicator').style.display = 'none';
-                document.getElementById('viewer').style.display = 'block';  
             })
             .catch(error => {
-                console.error('Error fetching or processing molecule data:', error);
+                console.error('There was a problem with the fetch operation:', error);
                 document.getElementById('loadingIndicator').style.display = 'none';
-                document.getElementById('errorFallback').style.display = 'flex';  
+                document.getElementById('errorFallback').style.display = 'block';
             });
     }
 
     function initializeViewer() {
         viewer = $3Dmol.createViewer('viewer', {
             defaultcolors: $3Dmol.rasmolElementColors,
-            backgroundColor: '#000'  
+            backgroundColor: 'black'
         });
     }
 
     function resetViewer() {
-        document.getElementById('smilesInput').value = '';
         if (viewer) {
             viewer.clear();
+            viewer.render();
         }
+        document.getElementById('smilesInput').value = '';
+    }
+</script>
+
+<style>
+    /* Spinner style */
+    .spinner {
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(0, 0, 0, 0.1);
+        border-top-color: #3498db;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
     }
 
-
-</script>
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+</style>
